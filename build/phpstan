@@ -1,0 +1,34 @@
+ ------ ------------------------------------------------------------- 
+ [32m Line [39m [32m src\DiceGame\Dice.php                                       [39m 
+ ------ ------------------------------------------------------------- 
+  13     Access to an undefined property Frah\DiceGame\Dice::$faces.  
+ ------ ------------------------------------------------------------- 
+
+ ------ --------------------------------------------------------------------- 
+ [32m Line [39m [32m src\DiceGame\Game.php                                               [39m 
+ ------ --------------------------------------------------------------------- 
+  11     Access to an undefined property Frah\DiceGame\Game::$computerScore.  
+  12     Access to an undefined property Frah\DiceGame\Game::$playerScore.    
+  17     Access to an undefined property Frah\DiceGame\Game::$data.           
+  27     Access to an undefined property Frah\DiceGame\Game::$playersDice.    
+  28     Access to an undefined property Frah\DiceGame\Game::$playersDice.    
+  29     Access to an undefined property Frah\DiceGame\Game::$playersDice.    
+  49     Access to an undefined property Frah\DiceGame\Game::$playersDice.    
+  51     Access to an undefined property Frah\DiceGame\Game::$computersDice.  
+  52     Access to an undefined property Frah\DiceGame\Game::$computersDice.  
+  54     Access to an undefined property Frah\DiceGame\Game::$computersDice.  
+  70     Access to an undefined property Frah\DiceGame\Game::$playersDice.    
+  78     Access to an undefined property Frah\DiceGame\Game::$computerScore.  
+  81     Access to an undefined property Frah\DiceGame\Game::$playerScore.    
+  99     Access to an undefined property Frah\DiceGame\Game::$computerScore.  
+  100    Access to an undefined property Frah\DiceGame\Game::$playerScore.    
+  107    Access to an undefined property Frah\DiceGame\Game::$playersDice.    
+  108    Access to an undefined property Frah\DiceGame\Game::$computersDice.  
+  115    Access to an undefined property Frah\DiceGame\Game::$playerScore.    
+  116    Access to an undefined property Frah\DiceGame\Game::$computerScore.  
+ ------ --------------------------------------------------------------------- 
+
+[37;41m                                                                                                                     [39;49m
+[37;41m [ERROR] Found 20 errors                                                                                             [39;49m
+[37;41m                                                                                                                     [39;49m
+
