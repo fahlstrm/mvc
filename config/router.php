@@ -21,6 +21,11 @@ $router->addRoute("GET", "/", "\Mos\Controller\Index");
 $router->addRoute("GET", "/debug", "\Mos\Controller\Debug");
 $router->addRoute("GET", "/twig", "\Mos\Controller\TwigView");
 
+$router->addGroup("/dice", function (RouteCollector $router) {
+    $router->addRoute("GET", "", ["\Mos\Controller\Twentyone", "start"]);
+    $router->addRoute("GET", "/destroy", ["\Mos\Controller\Session", "destroy"]);
+});
+
 $router->addGroup("/session", function (RouteCollector $router) {
     $router->addRoute("GET", "", ["\Mos\Controller\Session", "index"]);
     $router->addRoute("GET", "/destroy", ["\Mos\Controller\Session", "destroy"]);
