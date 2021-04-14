@@ -6,6 +6,12 @@ namespace Frah\DiceGame;
 
 class Game
 {
+    private int $computerScore;
+    private int $playerScore;
+    private object $playersDice;
+    private object $computersDice;
+    public array $data;
+
     public function __construct()
     {
         $this->computerScore = 0;
@@ -85,7 +91,7 @@ class Game
 
     private function resetGame(): void
     {
-        $data = [
+        $this->data = [
             "computersum" => null,
             "playersum" => null,
             "gameOver" => null,

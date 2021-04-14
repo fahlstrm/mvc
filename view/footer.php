@@ -1,6 +1,6 @@
 </main>
 <footer>
-    <p>Spelet 21</p>
+    <p>En MVC-sida</p>
 </footer>
 </body>
 </html>

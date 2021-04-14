@@ -1,6 +1,6 @@
 body {
     overflow-y: scroll;
-    width: 800px;
+    width: 60vw;
     margin: 0 auto;
     padding-left: 1em;
     border-left: 1px solid #ccc;
@@ -21,7 +21,12 @@ header a {
     color: #836C5F;
 }
 
+.nav a{
+    margin: 0 0.5vw;
+}
+
 main {
+    width: 60vw;
     min-height: 30em;
 }
 

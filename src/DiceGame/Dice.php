@@ -7,6 +7,7 @@ namespace Frah\DiceGame;
 class Dice
 {
     public int $roll;
+    private int $faces;
 
     public function __construct(int $faces)
     {

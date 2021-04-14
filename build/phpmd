@@ -1,3 +1,2 @@
-C:\Users\Frida\dbwebb-kurser\mvc\me\game\src\DiceGame\Game.php:88	Avoid unused local variables such as '$data'.
 C:\Users\Frida\dbwebb-kurser\mvc\me\game\src\Router\Router.php:21	The method dispatch() has a Cyclomatic Complexity of 25. The configured cyclomatic complexity threshold is 10.
 C:\Users\Frida\dbwebb-kurser\mvc\me\game\src\Router\Router.php:61	Missing class import via use statement (line '61', column '33').
