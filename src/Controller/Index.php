@@ -14,7 +14,7 @@ use function Mos\Functions\renderView;
  */
 class Index
 {
-    public function start(): ResponseInterface
+    public function __invoke(): ResponseInterface
     {
         $psr17Factory = new Psr17Factory();
 

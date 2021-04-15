@@ -18,17 +18,20 @@ class Game
         $this->playerScore = 0;
     }
 
-    public function startGame(): void
+    public function startGame(): array
     {
         $this->data = [
             "header" => "Börja spelet",
             "message" => "Välj antal tärningar att spela med",
-            "winner" => null
+            "winner" => null,
+            "playersScore" => $this->playerScore,
+            "computerScore" => $this->computerScore,
         ];
-        $this->view($this->data);
+        $data = $this->mergeData($this->data);
+        return $data;
     }
 
-    public function playGamePlayer($data): void
+    public function playGamePlayer($data): array
     {
         $this->playersDice->roll();
         $data["player"] = $this->playersDice->lastRoll();
@@ -47,10 +50,11 @@ class Game
             $this->resetGame();
             $data["message"] = "Välj antal tärningar om du vill starta ny omgång";
         }
-        $this->view($data);
+        $result = $this->mergeData($data);
+        return $result;
     }
 
-    public function playGameComputer($data): void
+    public function playGameComputer($data): array
     {
         $pSum = $this->playersDice->sum;
         $winner = null;
@@ -74,7 +78,8 @@ class Game
         $data["computersum"] = $cSum;
         $data["playersum"] = $pSum;
         $data["player"] = $this->playersDice->sum;
-        $this->view($data);
+        $data = $this->mergeData($data);
+        return $data;
     }
 
 
@@ -86,6 +91,16 @@ class Game
         }
         $this->playerScore += 1;
         return;
+    }
+
+    public function getPlayerScore(): int 
+    {
+        return $this->playerScore;
+    }
+
+    public function getComputerScore(): int 
+    {
+        return $this->computerScore;
     }
 
 
@@ -115,14 +130,14 @@ class Game
     }
 
 
-    public function view($data): void
+    public function mergeData($data): array
     {
         $default = [
             "playerScore" => $this->playerScore,
             "computerScore" => $this->computerScore,
         ];
+
         $data = array_merge($data, $default);
-        $body = \Mos\Functions\renderView("layout/diceGame.php", $data);
-        \Mos\Functions\sendResponse($body);
+        return $data;
     }
 }

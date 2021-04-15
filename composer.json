@@ -1,4 +1,5 @@
-{
+{   "name": "dbwebb/frah20",
+    "description": "A part of course mvc. Model, view, controller",
     "autoload": {
         "psr-4": {
             "Mos\\": "src/",

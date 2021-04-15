@@ -22,8 +22,10 @@ $router->addRoute("GET", "/debug", "\Mos\Controller\Debug");
 $router->addRoute("GET", "/twig", "\Mos\Controller\TwigView");
 
 $router->addGroup("/dice", function (RouteCollector $router) {
-    $router->addRoute("GET", "", ["\Mos\Controller\Twentyone", "start"]);
-    $router->addRoute("GET", "/destroy", ["\Mos\Controller\Session", "destroy"]);
+    $router->addRoute("GET", "", ["\Mos\Controller\TwentyOne", "start"]);
+    $router->addRoute("POST", "/play", ["\Mos\Controller\TwentyOne", "play"]);
+    $router->addRoute("POST", "/continue", ["\Mos\Controller\TwentyOne", "continue"]);
+    $router->addRoute("POST", "/reset", ["\Mos\Controller\TwentyOne", "reset"]);
 });
 
 $router->addGroup("/session", function (RouteCollector $router) {

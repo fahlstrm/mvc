@@ -5,13 +5,15 @@
  */
 
 declare(strict_types=1);
+use function Mos\Functions\url;
+
 
 // var_dump($_SESSION);
 // var_dump($_SESSION["amount"]);
 
 $header = $header ?? null;
 $message = $message ?? null;
-
+var_dump(realpath(__DIR__ . "/.."));
 ?>
 <div class="container">
   <div class="right">
@@ -19,7 +21,7 @@ $message = $message ?? null;
 
     <p><?= $message ?></p>
     <?php if (!isset($_SESSION["amount"]) && (!isset($playerResult)) || (isset($_SESSION["newGame"]))) { ?>
-    <form action="../htdocs/middle/redDiceGame" method="post">
+    <form action="<?= url("/dice/play") ?>" method="post">
       <label for="fname">Antal tärningar:</label>
       <input type="number" name="amount" min="1" max="2" value="1"><br><br>
       <button type="submit">Starta</button>
@@ -30,10 +32,11 @@ $message = $message ?? null;
           <p> Total summa: <?= $playersum ?> </p>
 
           <br><br>
-          <form action="../htdocs/middle/continueGame" method="post">
+          <form action="../dice/continue" method="post">
           <button type="submit" name="ongoing">Fortsätt</button>
           <button type="submit" name="stop">Stopp</button>
           </form>
+
     <?php } ?>
   </div>
   <div class="left">
@@ -52,7 +55,7 @@ $message = $message ?? null;
     <p> Datorn: <?=  $computerScore ?> </p>
      
     <?php if (isset($gameover)) { ?>
-        <form action="../htdocs/middle/resetScore" method="post">
+        <form action="../dice/reset" method="post">
           <button type="submit" name="reset">Nollställ Score</button>
         </form>
     <?php } ?>
