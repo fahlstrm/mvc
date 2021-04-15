@@ -52,9 +52,9 @@ class TwentyOne
         
         $_SESSION["continue"] = "ongoing";
 
-        $result = $callable->playGamePlayer($callable->data);
+        $data = $callable->playGamePlayer($callable->data);
 
-        $body = renderView("layout/diceGame.php", $result);
+        $body = renderView("layout/diceGame.php", $data);
 
         return $psr17Factory
             ->createResponse(200)
@@ -89,6 +89,7 @@ class TwentyOne
             "message" => "Välj antal tärningar",
         ];
         $_SESSION["object"]->resetScore();
+        $_SESSION["reset"];
         $data["playerScore"] = 0;
         $data["computerScore"] = 0;
 

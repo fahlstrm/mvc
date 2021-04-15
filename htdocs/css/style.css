@@ -42,11 +42,11 @@ footer {
     grid-template-rows: 50vh;
 }
 
-.right {
+.left {
     grid-column: 1;
 }
 
-.left {
+.right {
     grid-column: 2;
 }
 

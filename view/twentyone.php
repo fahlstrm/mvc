@@ -1,22 +1,18 @@
 <?php
 
 /**
- * Standard view template to generate a simple web page, or part of a web page.
+ * View to play Twentyone!
  */
 
 declare(strict_types=1);
 use function Mos\Functions\url;
 
-
-// var_dump($_SESSION);
-// var_dump($_SESSION["amount"]);
-
 $header = $header ?? null;
 $message = $message ?? null;
-var_dump(realpath(__DIR__ . "/.."));
+
 ?>
 <div class="container">
-  <div class="right">
+  <div class="left">
     <h1><?= $header ?></h1>
 
     <p><?= $message ?></p>
@@ -39,7 +35,7 @@ var_dump(realpath(__DIR__ . "/.."));
 
     <?php } ?>
   </div>
-  <div class="left">
+  <div class="right">
       <h1> Scoreboard: </h1>
     <?php if (isset($computersum)) { ?> 
       <h3> Denna omgång: </h3>
