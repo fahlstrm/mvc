@@ -18,23 +18,30 @@ $message = $message ?? null;
     <div class = "left"> 
         <h1><?= $header ?></h1>
 
-        <p><?= $message ?></p>
+        <p><?= $message ?> <?= 3-$thisround ?></p>
         <br>
         <form action="<?= url("/yatzy/roll") ?>" method="post">
             <?php foreach ($rolled as $key => $value) { ?> 
                 <label for="<?= $key ?>"> <?= $value ?> </label>
-                <input type="checkbox" name="<?= $key ?>" value="<?= $value?> ">
+                <?php if ($thisround < 3) { ?>
+                    <input type="checkbox" name="<?= $key ?>" value="<?= $value?> ">
+                <?php } ?>
                 <br>
                 
             <?php } ?>
             <br>
+            <?php if ($thisround < 3 && $gameover != true ) { ?>
             <input type="submit" value="Kasta om resten">
-            
+
+            <?php } else if ($gameover == true) { ?>
+                <p> Omgången är över. Resultatet är <?= $score ?> </p>
+            <?php } else {?>
+            <p> Inga slag kvar, välj hur du vill bokföra slagen till höger </p>
+            <?php } ?>
         </form>
         <br>
 
-        <h2> Nuvarande score: <?= $score ?> </h2>
-
+        <p> <?php if ($yatzy) {?> YATZY <?php } ?></p>
     </div>
 
     <div class = "right"> 
@@ -60,15 +67,23 @@ $message = $message ?? null;
                             <?php if (is_null($value)) { ?>
                                 <?php if ($key != "yatzy" && $key != "bonus") { ?>
                                 
-                                    <input type="radio" name="values" id="<?= $key ?>">
+                                    <input type="radio" name="values" value="<?= $key ?>">
                                     <label for="<?= $key ?>"></label><br>
                                 <?php } ?>
                             <?php } ?> 
                         </td>
                     </tr>
                 <?php } ?>
+                <?php foreach ($scoreextra as $key => $value) { ?> 
+                    <tr>
+                       <td> <?= $key ?> </td>
+                    </tr>
+                <?php } ?>
             </table>
-            <input type="submit" value="Välj">
+            <?php if ($gameover != true) { ?>
+                <input type="submit" value="Välj">
+
+            <?php } ?>
         </form>
     </div>
 

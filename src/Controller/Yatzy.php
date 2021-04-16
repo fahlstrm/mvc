@@ -18,9 +18,10 @@ class Yatzy
         $psr17Factory = new Psr17Factory();
 
         $callable = new \Frah\YatzyGame\Game();
-        $_SESSION["yazty"] = $callable;
+        $_SESSION["yatzyobject"] = $callable;
         $data = $callable->startGame(); 
         
+  
         $body = renderView("layout/yatzyGame.php", $data);
 
         return $psr17Factory
@@ -32,12 +33,11 @@ class Yatzy
     {
         $psr17Factory = new Psr17Factory();
 
-        $callable = $_SESSION["yazty"];
-        var_dump(count($_POST));
-        
+        $callable = $_SESSION["yatzyobject"];
+        $data = $callable->rollAgain($_POST, $callable->diceHand->getLastRoll());
 
         $body = renderView("layout/yatzyGame.php", $data);
-
+        // var_dump($data["yatzy"]);
         return $psr17Factory
             ->createResponse(200)
             ->withBody($psr17Factory->createStream($body));
@@ -47,8 +47,8 @@ class Yatzy
     {
         $psr17Factory = new Psr17Factory();
 
-        $callable = $_SESSION["yazty"];
-
+        $callable = $_SESSION["yatzyobject"];
+        $data = $callable->updateScoreBoard($_POST["values"]);
 
         $body = renderView("layout/yatzyGame.php", $data);
 
