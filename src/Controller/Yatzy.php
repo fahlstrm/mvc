@@ -35,6 +35,7 @@ class Yatzy
 
         $callable = $_SESSION["yatzyobject"];
         $data = $callable->rollAgain($_POST, $callable->diceHand->getLastRoll());
+        // echo($data["gameover"]);
 
         $body = renderView("layout/yatzyGame.php", $data);
         // var_dump($data["yatzy"]);
@@ -49,6 +50,8 @@ class Yatzy
 
         $callable = $_SESSION["yatzyobject"];
         $data = $callable->updateScoreBoard($_POST["values"]);
+        // $data["test"] = $callable->getScoreBoard();
+
 
         $body = renderView("layout/yatzyGame.php", $data);
 
@@ -57,4 +60,19 @@ class Yatzy
             ->withBody($psr17Factory->createStream($body));
     }
 
+    public function reset(): ResponseInterface
+    {
+        $psr17Factory = new Psr17Factory();
+
+        $callable = $_SESSION["yatzyobject"];
+        $data = $callable->resetGame();
+        // $data["test"] = $callable->getScoreBoard();
+
+
+        $body = renderView("layout/yatzyGame.php", $data);
+
+        return $psr17Factory
+            ->createResponse(200)
+            ->withBody($psr17Factory->createStream($body));
+    }
 }
