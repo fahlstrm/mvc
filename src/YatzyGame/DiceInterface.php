@@ -1,9 +1,10 @@
-<?php 
+<?php
 
-declare(strict_types=1);
 /*
 * Interface what a dice should contain
 */
+
+declare(strict_types=1);
 
 namespace Frah\YatzyGame;
 

@@ -1,9 +1,10 @@
-<?php 
+<?php
 
-declare(strict_types=1);
 /*
 * Basic trait of a Dice
 */
+
+declare(strict_types=1);
 
 namespace Frah\YatzyGame;
 

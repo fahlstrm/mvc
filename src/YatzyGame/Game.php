@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Frah\YatzyGame;
 
-
-class Game {
+class Game
+{
     const DICE = 5;
     private array $scoreExtra;
     private array $scoreBoard;
     private int $thisRound;
-
+    public object $diceHand;
+    public array $data;
 
     public function __construct()
     {
@@ -56,46 +57,46 @@ class Game {
 
     public function rollAgain($rollAgain, $lastRoll): array
     {
-        for ($i = 0; $i < count($lastRoll); $i++) {
+        $interations = count($lastRoll);
+        for ($i = 0; $i < $interations; $i++) {
             if (isset($rollAgain[$i])) {
                 $this->diceHand->dices[$i]->roll();
             }
         }
         $this->setThisRound();
-        $data["rolled"] = $this->diceHand->getLastRoll();
-        return $this->mergeDefaultData($data);
+        $this->data["rolled"] = $this->diceHand->getLastRoll();
+        return $this->mergeDefaultData($this->data);
     }
 
     public function updateScoreBoard($choosen): array
     {
         $lastRoll = $this->diceHand->getLastRoll();
-        foreach ($lastRoll as $key => $val) {
+        foreach ($lastRoll as $val) {
             if (intval($choosen) == $val) {
                 if (is_null($this->scoreBoard[$choosen])) {
                     $this->scoreBoard[$choosen] = $val;
-                } else {
-                    $this->scoreBoard[$choosen] = $this->scoreBoard[$choosen] + $choosen;
+                    continue;
                 }
+                $this->scoreBoard[$choosen] = $this->scoreBoard[$choosen] + $choosen;
             }
         }
         if (!in_array($choosen, $lastRoll)) {
             $this->scoreBoard[$choosen] = 0;
         }
 
-        if ($this->checkScoreBoard() == false){
+        if ($this->checkScoreBoard() == false) {
             $this->resetThisRound();
             $this->diceHand->roll();
             $this->checkYatzy();
-           
-        } else {
+        } else if ($this->checkScoreBoard()) {
             $this->finalScore();
         }
 
-        $data["rolled"] = $this->diceHand->getLastRoll();
-        return $this->mergeDefaultData($data);
+        $this->data["rolled"] = $this->diceHand->getLastRoll();
+        return $this->mergeDefaultData($this->data);
     }
 
-    public function finalScore(): void 
+    public function finalScore(): void
     {
         if ($this->checkScoreBoard()) {
             $this->setBonus();
@@ -104,10 +105,10 @@ class Game {
     }
 
     /*
-    * array_uniqe removes duplicates from array. 
+    * array_uniqe removes duplicates from array.
     * If array count == 1 when done, all values are equal
     * If array count greater, there are missmatch in array meaning no yatzy
-    */ 
+    */
     public function checkYatzy(): bool
     {
         $dices = $this->diceHand->getLastRoll();
@@ -115,22 +116,21 @@ class Game {
         if ($check == "true") {
             $this->scoreExtra["yatzy"] = 50;
             $this->resetRoll();
-
         }
         return $check;
     }
 
 
-    public function resetRoll(): void 
+    public function resetRoll(): void
     {
         $this->resetThisRound();
         $this->diceHand->roll();
     }
 
 
-    public function checkScoreBoard(): bool 
+    public function checkScoreBoard(): bool
     {
-        foreach ($this->scoreBoard as $key => $value) {
+        foreach (array_keys($this->scoreBoard) as $key) {
             if (is_null($this->scoreBoard[$key])) {
                 return false;
             }
@@ -145,7 +145,7 @@ class Game {
     }
 
 
-    public function getScore(): int 
+    public function getScore(): int
     {
         return $this->scoreExtra["summa"];
     }
@@ -153,7 +153,7 @@ class Game {
 
     public function setScore(): void
     {
-        foreach ($this->scoreBoard as $key => $value) {
+        foreach ($this->scoreBoard as $value) {
             $this->scoreExtra["summa"] = $this->scoreExtra["summa"] + $value;
         }
         if (isset($this->scoreExtra["bonus"])) {
@@ -171,7 +171,7 @@ class Game {
     }
 
 
-    public function getScoreExtra(): array 
+    public function getScoreExtra(): array
     {
         return $this->scoreExtra;
     }
@@ -206,7 +206,7 @@ class Game {
 
 
     public function mergeDefaultData($data = []): array
-    {   
+    {
         $default = [
             "header" => "Fem lika innebär YATZY!",
             "message" => "Bocka i de tärningar du vill slå om, antal slag kvar:",
@@ -216,7 +216,6 @@ class Game {
             "thisround" => $this->getThisRound(),
             "yatzy" => $this->checkYatzy(),
         ];
-        
         $data = array_merge($data, $default);
 
         return $data;

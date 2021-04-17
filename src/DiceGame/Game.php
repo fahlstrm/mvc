@@ -93,12 +93,12 @@ class Game
         return;
     }
 
-    public function getPlayerScore(): int 
+    public function getPlayerScore(): int
     {
         return $this->playerScore;
     }
 
-    public function getComputerScore(): int 
+    public function getComputerScore(): int
     {
         return $this->computerScore;
     }

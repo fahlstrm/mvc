@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mos\Router;
 
+use Frah\YatzyGame\Game;
+
 use function Mos\Functions\{
     destroySession,
     redirectTo,
@@ -58,7 +60,7 @@ class Router
             return;
         } else if ($method === "GET" && $path === "/dice") {
             if (!isset($_SESSION["amount"])) {
-                $callable = new \Frah\DiceGame\Game();
+                $callable = new Game();
                 $callable->startGame();
                 $_SESSION["object"] = $callable;
                 $_SESSION["continue"] = "play";

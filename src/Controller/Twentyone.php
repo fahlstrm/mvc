@@ -1,14 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mos\Controller;
 
-
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ResponseInterface;
+use Frah\DiceGame\Game;
 
 use function Mos\Functions\renderView;
-use Frah\DiceGame;
 
 class TwentyOne
 {
@@ -16,7 +16,7 @@ class TwentyOne
     {
         $psr17Factory = new Psr17Factory();
 
-        $callable = new \Frah\DiceGame\Game();
+        $callable = new Game();
 
         $data = [
             "header" => "Spelet 21",
@@ -49,7 +49,7 @@ class TwentyOne
             "header" => "Kom igen då!",
             "message" => "Tryck på fortsätt om du vill fortsätta"
         ];
-        
+
         $_SESSION["continue"] = "ongoing";
 
         $data = $callable->playGamePlayer($callable->data);
@@ -64,12 +64,11 @@ class TwentyOne
     public function continue(): ResponseInterface
     {
         $psr17Factory = new Psr17Factory();
-
+        $result = null;
         if (isset($_POST["ongoing"])) {
             $result = $_SESSION["object"]->playGamePlayer($_SESSION["object"]->data);
         } else if (isset($_POST["stop"])) {
             $result = $_SESSION["object"]->playGameComputer($_SESSION["object"]->data);
-
         }
         $body = renderView("layout/diceGame.php", $result);
 
@@ -89,7 +88,7 @@ class TwentyOne
             "message" => "Välj antal tärningar",
         ];
         $_SESSION["object"]->resetScore();
-        $_SESSION["reset"];
+        // $_SESSION["reset"];
         $data["playerScore"] = 0;
         $data["computerScore"] = 0;
 

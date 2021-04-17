@@ -1,9 +1,10 @@
 <?php
 
-declare(strict_types=1);
 /**
- * A game-dice implementing DiceInterface, using DiceTrait to fufill 
+ * A game-dice implementing DiceInterface, using DiceTrait to fufill
  */
+
+declare(strict_types=1);
 
 namespace Frah\YatzyGame;
 

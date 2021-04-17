@@ -33,7 +33,6 @@ $router->addGroup("/yatzy", function (RouteCollector $router) {
     $router->addRoute("POST", "/roll", ["\Mos\Controller\Yatzy", "roll"]);
     $router->addRoute("POST", "/save", ["\Mos\Controller\Yatzy", "save"]);
     $router->addRoute("POST", "/reset", ["\Mos\Controller\Yatzy", "reset"]);
- 
 });
 
 $router->addGroup("/session", function (RouteCollector $router) {

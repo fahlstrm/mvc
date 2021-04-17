@@ -7,6 +7,7 @@ namespace Frah\YatzyGame;
 class DiceHand implements DiceInterface
 {
     use DiceTrait;
+
     public array $dices;
     public ?int $sum = null;
 
@@ -31,9 +32,8 @@ class DiceHand implements DiceInterface
         $len = count($this->dices);
         $res = [];
         for ($i = 0; $i < $len; $i++) {
-            $res[$i]= $this->dices[$i]->getLastRoll();
+            $res[$i] = $this->dices[$i]->getLastRoll();
         }
-        // $res = substr($res, 0, -2);
         return $res;
     }
 }

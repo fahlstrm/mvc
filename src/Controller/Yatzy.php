@@ -1,15 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mos\Controller;
 
-
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ResponseInterface;
+use Frah\YatzyGame\Game;
 
 use function Mos\Functions\renderView;
-
-use Frah\YatzyGame;
 
 class Yatzy
 {
@@ -17,11 +16,10 @@ class Yatzy
     {
         $psr17Factory = new Psr17Factory();
 
-        $callable = new \Frah\YatzyGame\Game();
+        $callable = new Game();
         $_SESSION["yatzyobject"] = $callable;
-        $data = $callable->startGame(); 
-        
-  
+        $data = $callable->startGame();
+
         $body = renderView("layout/yatzyGame.php", $data);
 
         return $psr17Factory
@@ -50,8 +48,6 @@ class Yatzy
 
         $callable = $_SESSION["yatzyobject"];
         $data = $callable->updateScoreBoard($_POST["values"]);
-        // $data["test"] = $callable->getScoreBoard();
-
 
         $body = renderView("layout/yatzyGame.php", $data);
 
@@ -66,8 +62,6 @@ class Yatzy
 
         $callable = $_SESSION["yatzyobject"];
         $data = $callable->resetGame();
-        // $data["test"] = $callable->getScoreBoard();
-
 
         $body = renderView("layout/yatzyGame.php", $data);
 

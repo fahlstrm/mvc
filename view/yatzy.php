@@ -18,7 +18,7 @@ $message = $message ?? null;
     <div class = "left"> 
         <h1><?= $header ?></h1>
 
-        <p><?= $message ?> <?= 3-$thisround ?></p>
+        <p><?= $message ?> <?= 3 - $thisround ?></p>
         <br>
         <form action="<?= url("/yatzy/roll") ?>" method="post">
             <?php foreach ($rolled as $key => $value) { ?> 
@@ -30,7 +30,7 @@ $message = $message ?? null;
                 
             <?php } ?>
             <br>
-            <?php if ($thisround < 3 && $gameover == 0 && !$yatzy ) { ?>
+            <?php if ($thisround < 3 && $gameover == 0 && !$yatzy) { ?>
                 <input type="submit" value="Kasta om markerade">
             <?php } else if ($gameover == 1) { ?>
                 <p> Omgången är över. Resultatet är <?= $scoreextra["summa"] ?> </p>
@@ -70,7 +70,6 @@ $message = $message ?? null;
                         <td> 
                             <?php if (is_null($value)) { ?>
                                 <?php if ($key != "yatzy" && $key != "bonus") { ?>
-                                
                                     <input type="radio" name="values" value="<?= $key ?>">
                                     <label for="<?= $key ?>"></label><br>
                                 <?php } ?>

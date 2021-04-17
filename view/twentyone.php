@@ -5,6 +5,7 @@
  */
 
 declare(strict_types=1);
+
 use function Mos\Functions\url;
 
 $header = $header ?? null;
