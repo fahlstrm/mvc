@@ -10,6 +10,8 @@ use function Mos\Functions\url;
 
 $header = $header ?? null;
 $message = $message ?? null;
+$player = $player ?? null;
+$playersum = $playersum ?? null;
 
 ?>
 <div class="container">

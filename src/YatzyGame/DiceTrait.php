@@ -21,6 +21,7 @@ trait DiceTrait
     public function roll(): int
     {
         $this->roll = rand(1, 6);
+        // echo($this->roll);
         return $this->roll;
     }
 

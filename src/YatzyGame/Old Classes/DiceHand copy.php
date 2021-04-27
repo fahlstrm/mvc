@@ -11,7 +11,7 @@ class DiceHand implements DiceInterface
     public array $dices;
     public ?int $sum = null;
 
-    public function __construct(int $amount)
+    public function __construct($amount)
     {
         for ($i = 0; $i < $amount; $i++) {
             $this->dices[$i] = new GameDice();

@@ -13,7 +13,7 @@ class Game
     public object $diceHand;
     public array $data;
 
-    public function __construct(object $diceHand)
+    public function __construct()
     {
         $this->scoreBoard = [
             1 => null,
@@ -28,7 +28,7 @@ class Game
             "summa" => 0,
             "bonus" => null
         ];
-        $this->diceHand = $diceHand;
+        $this->diceHand = new DiceHand(self::DICE);
         $this->thisRound = 0;
     }
 

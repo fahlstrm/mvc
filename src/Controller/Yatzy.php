@@ -9,14 +9,16 @@ use Psr\Http\Message\ResponseInterface;
 use Frah\YatzyGame\Game;
 
 use function Mos\Functions\renderView;
+use function Frah\YatzyGame;
+
 
 class Yatzy
 {
     public function start(): ResponseInterface
     {
         $psr17Factory = new Psr17Factory();
-
-        $callable = new Game();
+        $diceHand = new \Frah\YatzyGame\DiceHand(5);
+        $callable = new Game($diceHand);
         $_SESSION["yatzyobject"] = $callable;
         $data = $callable->startGame();
 
