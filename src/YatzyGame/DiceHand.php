@@ -11,20 +11,22 @@ class DiceHand implements DiceInterface
     public array $dices;
     public ?int $sum = null;
 
-    public function __construct(int $amount)
+    public function __construct(int $amount, $dice)
     {
         for ($i = 0; $i < $amount; $i++) {
-            $this->dices[$i] = new GameDice();
+            $this->dices[$i] = new $dice;
         }
     }
 
-    public function roll(): void
+    public function roll(): array
     {
         $len = count($this->dices);
 
         for ($i = 0; $i < $len; $i++) {
             $this->sum += $this->dices[$i]->roll();
         }
+
+        return $this->dices;
     }
 
     public function getLastRoll(): array

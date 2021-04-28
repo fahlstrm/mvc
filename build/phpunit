@@ -1,9 +1,17 @@
+PHPUnit 9.5.4 by Sebastian Bergmann and contributors.
 
-Fatal error: Uncaught ParseError: syntax error, unexpected '}' in C:\Users\Frida\dbwebb-kurser\mvc\me\game\test\Game\YatzyTest.php:88
-Stack trace:
-#0 C:\Users\Frida\dbwebb-kurser\mvc\me\game\vendor\phpunit\phpunit\src\Util\FileLoader.php(49): PHPUnit\Util\FileLoader::load('C:\\Users\\Frida\\...')
-#1 C:\Users\Frida\dbwebb-kurser\mvc\me\game\vendor\phpunit\phpunit\src\Framework\TestSuite.php(402): PHPUnit\Util\FileLoader::checkAndLoad('C:\\Users\\Frida\\...')
-#2 C:\Users\Frida\dbwebb-kurser\mvc\me\game\vendor\phpunit\phpunit\src\Framework\TestSuite.php(530): PHPUnit\Framework\TestSuite->addTestFile('C:\\Users\\Frida\\...')
-#3 C:\Users\Frida\dbwebb-kurser\mvc\me\game\vendor\phpunit\phpunit\src\TextUI\TestSuiteMapper.php(67): PHPUnit\Framework\TestSuite->addTestFiles(Array)
-#4 C:\Users\Frida\dbwebb-kurser\mvc\me\game\vendor\phpunit\phpunit\src\TextUI\Command.php(390): PHPUnit\TextUI\TestSuiteMapper->map(Object(PHPUnit\TextUI\XmlConfiguration\TestSuiteCollection), '')
-#5 C:\Users\Frida\dbwebb-kurser\mvc\me\game\vendor\phpunit\ in C:\Users\Frida\dbwebb-kurser\mvc\me\game\vendor\phpunit\phpunit\src\TextUI\Command.php on line 98
+..W......................                                         25 / 25 (100%)
+
+Time: 00:00.434, Memory: 18.00 MB
+
+There was 1 warning:
+
+1) Warning
+No tests found in class "Frah\DiceGame\TwentyoneDiceHandTest".
+
+WARNINGS!
+Tests: 25, Assertions: 26, Warnings: 1.
+
+Generating code coverage report in Clover XML format ... done [00:00.288]
+
+Generating code coverage report in HTML format ... done [00:00.369]

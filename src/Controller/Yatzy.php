@@ -17,8 +17,7 @@ class Yatzy
     public function start(): ResponseInterface
     {
         $psr17Factory = new Psr17Factory();
-        $diceHand = new \Frah\YatzyGame\DiceHand(5);
-        $callable = new Game($diceHand);
+        $callable = new Game(new \Frah\YatzyGame\DiceHand(5, new \Frah\YatzyGame\GameDice));
         $_SESSION["yatzyobject"] = $callable;
         $data = $callable->startGame();
 

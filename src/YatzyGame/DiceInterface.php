@@ -10,7 +10,7 @@ namespace Frah\YatzyGame;
 
 interface DiceInterface
 {
-    public function __construct(int $amount);
+    public function __construct(int $amount, object $dice);
     public function roll();
     public function getLastRoll();
 }

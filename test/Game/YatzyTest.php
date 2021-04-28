@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Frah\YatzyGame;
 
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ResponseInterface;
+// use Psr\Http\Message\ResponseInterface;
 
 /**
  * Test methods in Yatzy game class
@@ -16,10 +16,21 @@ class YatzyTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->diceHand = 
-        $this->game = new Game();
-        $stubDH = $this->createStub("diceHand");
-        
+        // $mockDice = $this->createMock("\Frah\YatzyGame\GameDice");
+        // $mockDice = $this->getMockBuilder("\Frah\YatzyGame\GameDice")->getMock();
+        // $mockDice->roll = 6;
+        // $mockDice->method("getLastRoll")->willReturn(6);
+        // $mockDice->method("roll")->willReturn(6);
+
+        // $mockHand = $this->getMockBuilder("\Frah\YatzyGame\DiceHand")
+        //         ->setConstructorArgs(array(5, $mockDice))
+        //         ->getMock();
+        // $mockHand->dices = [$mockDice, $mockDice, $mockDice, $mockDice, $mockDice];
+
+        // $mockHand->method("getLastRoll")->willReturn([6, 6, 1, 6, 5]);
+        // $this->game = new Game($mockHand);
+        // $this->game->diceHand->getLastRoll();
+        $this->game = new Game(new DiceHand(5, new GameDice));
     }
 
     /**
@@ -46,19 +57,93 @@ class YatzyTest extends TestCase
     }
 
     /**
-     * Kräver mock?
+     * Testing roll again method by getting last roll, saving the first value
+     * Create a array to throw again
+     * Checking that the saved value are still the same
      */
-    // public function testRollAgain()
+    public function testRollAgain()
+    {
+        $this->game->startGame();
+        $last = $this->game->diceHand->getLastRoll();
+        $exp = $last[0];
+        $throw = array("1"=> $last[1], "2"=> $last[2], "3" =>  $last[3], "4" => $last[4]);
+        $res = $this->game->rollAgain($throw, $last);
+        $this->assertEquals($exp, $res["rolled"][0]);
+    }
+
+    /**
+     * Testing test roll again by saving two values and that the remain the same
+     */
+    public function testRollAgainTwo()
+    {
+        $this->game->startGame();
+        $last = $this->game->diceHand->getLastRoll();
+        $exp = array($last[0], $last[4]);
+        $throw = array("1"=> $last[1], "2"=> $last[2], "3" =>  $last[3]);
+        $res = $this->game->rollAgain($throw, $last);
+        $this->assertEquals($exp, [$res["rolled"][0], $res["rolled"][4]]);
+    }
+
+
+    // public function testUpdateScoreBoard()
     // {
-        
-    //     $res = $game->rollAgain();
-    //     $this->asserTyp
+    //     $res = $this->game->rollAgain();
     // }
+
+
+    public function testFinalScore()
+    {
+        $scoreBoard = [
+            1 => 3,
+            2 => 6,
+            3 => 6,
+            4 => 16,
+            5 => 15,
+            6 => 12
+        ];
+        $this->game->setScoreBoard($scoreBoard);
+        $res = $this->game->finalScore();
+        $this->assertTrue($res);
+    }
+
+
+    public function testCheckYatzy()
+    {
+        $this->game->diceHand->roll();
+        $res = $this->game->checkYatzy();
+        $this->assertFalse($res);
+    }
+
+    /**
+     * Using a mock object to be able to make false yatzy
+     */
+    public function testCheckYatzyTrue()
+    {
+        $mockDice = $this->createMock("\Frah\YatzyGame\GameDice");
+        $mockDice = $this->getMockBuilder("\Frah\YatzyGame\GameDice")->getMock();
+        $mockDice->roll = 6;
+        $mockDice->method("getLastRoll")->willReturn(6);
+        $mockDice->method("roll")->willReturn(6);
+        $mockHand = $this->getMockBuilder("\Frah\YatzyGame\DiceHand")
+                ->setConstructorArgs(array(5, $mockDice))
+                ->getMock();
+        $mockHand->method("getLastRoll")->willReturn([6, 6, 6, 6, 6]);
+
+        $this->game->diceHand = $mockHand;
+        $res = $this->game->checkYatzy();
+        $this->assertTrue($res);
+    }
+
+
+    public function testResetRoll()
+    {
+        $res = $this->game->resetRoll();
+        $this->assertIsArray($res);
+    }
 
     /**
      * Test that method checkScoreBoard returns false when starting the game
      */
-
     public function testCheckScoreBoard()
     {
         $res = $this->game->checkScoreBoard();
@@ -81,42 +166,52 @@ class YatzyTest extends TestCase
         $this->assertEquals($exp, $res);
     }
 
-    // public function testSetBonus()
+
+    // public function testSetScore()
     // {
-    //     $this->game->scoreExtra["summa"] = 63;
-    //     $res = $this->game->getScoreExtra
+
     // }
+
+    public function testGetScoreExtra()
+    {
+        $res = $this->game->getScoreExtra();
+        $this->assertIsArray($res);
+    }
+
+    public function testSetScore()
+    {
+        $exp = $this->game->setScoreExtraSumma(63);
+        $this->assertEquals(63, $exp);
+
+        $res = $this->game->setBonus();
+        $bonus = 50;
+        $this->assertEquals($bonus, $res);
+    }
+
+    public function testResetThisRound()
+    {
+        $this->game->setThisRound();
+        $this->game->setThisRound();
+        $res = $this->game->setThisRound();
+        $this->assertEquals(3, $res);
+
+        $res = $this->game->resetThisRound();
+        $this->assertEquals(1, $res);
+    }
+
+    public function testResetGame() 
+    {
+        $res = $this->game->resetGame();
+        $this->assertIsArray($res);
+    }
+
+    // public function testMergeDefaultData()
+    // {
+    //     $res = $this->game->mergeDefaultData([1, 2, 3, "test"]);
+    //     $this->assertEquals($res[0], 1);
+    // }
+
 }
 
 
-class DiceHandTest implements DiceInterface
-{
-    public array $dices;
-    public ?int $sum = null;
 
-    public function __construct($amount)
-    {
-        for ($i = 0; $i < $amount; $i++) {
-            $this->dices[$i] = new GameDice();
-        }
-    }
-
-    public function roll(): void
-    {
-        $len = count($this->dices);
-
-        for ($i = 0; $i < $len; $i++) {
-            $this->sum += $this->dices[$i]->roll();
-        }
-    }
-
-    public function getLastRoll(): array
-    {
-        $len = count($this->dices);
-        $res = [];
-        for ($i = 0; $i < $len; $i++) {
-            $res[$i] = $this->dices[$i]->getLastRoll();
-        }
-        return $res;
-    }
-}

@@ -23,7 +23,10 @@ class DiceHand
         for ($i = 0; $i < $len; $i++) {
             $this->sum += $this->dices[$i]->roll();
         }
+
     }
+
+    
 
     public function lastRoll(): string
     {

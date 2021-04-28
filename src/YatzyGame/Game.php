@@ -13,7 +13,7 @@ class Game
     public object $diceHand;
     public array $data;
 
-    public function __construct(object $diceHand)
+    public function __construct(DiceInterface $diceHand)
     {
         $this->scoreBoard = [
             1 => null,
@@ -57,8 +57,8 @@ class Game
 
     public function rollAgain($rollAgain, $lastRoll): array
     {
-        $interations = count($lastRoll);
-        for ($i = 0; $i < $interations; $i++) {
+        $iterations = count($lastRoll);
+        for ($i = 0; $i < $iterations; $i++) {
             if (isset($rollAgain[$i])) {
                 $this->diceHand->dices[$i]->roll();
             }
@@ -96,12 +96,14 @@ class Game
         return $this->mergeDefaultData($this->data);
     }
 
-    public function finalScore(): void
+    public function finalScore(): bool
     {
         if ($this->checkScoreBoard()) {
             $this->setBonus();
             $this->setScore();
+            return true;
         }
+        return false;
     }
 
     /*
@@ -116,15 +118,17 @@ class Game
         if ($check == "true") {
             $this->scoreExtra["yatzy"] = 50;
             $this->resetRoll();
+            return true;
         }
         return $check;
     }
 
 
-    public function resetRoll(): void
+    public function resetRoll(): array
     {
         $this->resetThisRound();
         $this->diceHand->roll();
+        return $this->diceHand->dices;
     }
 
 
@@ -141,6 +145,15 @@ class Game
 
     public function getScoreBoard(): array
     {
+        return $this->scoreBoard;
+    }
+
+    public function setScoreBoard($values): array
+    {
+        for ($i = 1; $i < count($values)+1; $i++) {
+            $this->scoreBoard[$i] = $values[$i];
+        }
+
         return $this->scoreBoard;
     }
 
@@ -165,9 +178,10 @@ class Game
     }
 
 
-    public function setBonus(): void
+    public function setBonus(): int
     {
-        $this->scoreExtra["bonus"] = $this->scoreExtra["summa"] > 63 ? 50 : 0;
+        $this->scoreExtra["bonus"] = $this->scoreExtra["summa"] >= 63 ? 50 : 0;
+        return $this->scoreExtra["bonus"];
     }
 
 
@@ -176,11 +190,19 @@ class Game
         return $this->scoreExtra;
     }
 
+    public function setScoreExtraSumma($sum): int
+    {
+        $this->scoreExtra["summa"] = $sum;
+        return $this->scoreExtra["summa"];
+    }
 
-    private function resetThisRound(): void
+
+    public function resetThisRound(): int
     {
         $this->thisRound = 1;
+        return $this->thisRound;
     }
+
 
 
     public function resetGame(): array

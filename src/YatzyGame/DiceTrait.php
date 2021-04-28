@@ -11,9 +11,9 @@ namespace Frah\YatzyGame;
 trait DiceTrait
 {
     public int $faces;
-    private int $roll;
+    public int $roll;
 
-    public function __construct($faces = 6)
+    public function __construct($faces = 6, $dice=null)
     {
         $this->faces = $faces;
     }
