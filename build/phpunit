@@ -1,17 +1,11 @@
 PHPUnit 9.5.4 by Sebastian Bergmann and contributors.
 
-..W......................                                         25 / 25 (100%)
+.........................................................         57 / 57 (100%)
 
-Time: 00:00.434, Memory: 18.00 MB
+Time: 00:03.569, Memory: 24.00 MB
 
-There was 1 warning:
+OK (57 tests, 77 assertions)
 
-1) Warning
-No tests found in class "Frah\DiceGame\TwentyoneDiceHandTest".
+Generating code coverage report in Clover XML format ... done [00:00.144]
 
-WARNINGS!
-Tests: 25, Assertions: 26, Warnings: 1.
-
-Generating code coverage report in Clover XML format ... done [00:00.288]
-
-Generating code coverage report in HTML format ... done [00:00.369]
+Generating code coverage report in HTML format ... done [00:00.467]

@@ -69,7 +69,10 @@ class TwentyOne
             $result = $_SESSION["object"]->playGamePlayer($_SESSION["object"]->data);
         } else if (isset($_POST["stop"])) {
             $result = $_SESSION["object"]->playGameComputer($_SESSION["object"]->data);
+        } else {
+            $result = [];
         }
+
         $body = renderView("layout/diceGame.php", $result);
 
         return $psr17Factory

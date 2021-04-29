@@ -6,29 +6,29 @@ namespace Mos\Controller;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
-use \Frah\YatzyGame;
+use \Frah\DiceGame;
 
-class ControllerYatzyTest extends TestCase
+class ControllerTwentyOneTest extends TestCase
 {
     public function testCreateTheControllerClass()
     {
-        $controller = new Yatzy();
-        $this->assertInstanceOf("\Mos\Controller\Yatzy", $controller);
+        $controller = new TwentyOne();
+        $this->assertInstanceOf("\Mos\Controller\TwentyOne", $controller);
     }
 
-    public function testYatzyControllerReturnsResponse()
+    public function testTwentyOneControllerReturnsResponse()
     {
-        $controller = new Yatzy();
+        $controller = new TwentyOne();
 
         $exp = "\Psr\Http\Message\ResponseInterface";
         $res = $controller->start();
         $this->assertInstanceOf($exp, $res);
 
-        $res = $controller->roll();
+        $res = $controller->play();
         $this->assertInstanceOf($exp, $res);
 
         
-        $res = $controller->save();
+        $res = $controller->continue();
         $this->assertInstanceOf($exp, $res);
 
         

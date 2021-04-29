@@ -9,7 +9,7 @@ class Dice
     public int $roll;
     private int $faces;
 
-    public function __construct(int $faces)
+    public function __construct(int $faces = 6)
     {
         $this->faces = $faces;
     }

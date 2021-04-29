@@ -15,19 +15,19 @@ class TwentyoneDiceHandTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->diceHand = new DiceHand(5);
+        $this->diceHand = new DiceHand(5, new Dice);
     }
 
-    // public function testRollHandTwentyOne()
-    // {
-    //     $res = $this->diceHand->roll();
-    //     $this->assertIsArray($res);
-    // }
+    public function testRollHandTwentyOne()
+    {
+        $res = $this->diceHand->roll();
+        $this->assertIsInt($res);
+    }
 
-    // public function testLastRollTwentyOne()
-    // {
-    //     $rolled = $this->diceHand->roll();
-    //     $res = $this->diceHand->getLastRoll();
-    //     $this->assertIsString($res);
-    // }
+    public function testLastRollTwentyOne()
+    {
+        $rolled = $this->diceHand->roll();
+        $res = $this->diceHand->lastRoll();
+        $this->assertIsString($res);
+    }
 }

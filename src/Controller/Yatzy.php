@@ -48,7 +48,7 @@ class Yatzy
         $psr17Factory = new Psr17Factory();
 
         $callable = $_SESSION["yatzyobject"];
-        $data = $callable->updateScoreBoard($_POST["values"]);
+        $data = $callable->updateScoreBoard($_POST["values"] ?? null);
 
         $body = renderView("layout/yatzyGame.php", $data);
 

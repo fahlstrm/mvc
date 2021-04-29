@@ -50,8 +50,8 @@ $playersum = $playersum ?? null;
           <h1> <?= $winner ?>
     <?php } ?>
     <h3> Total ställning: </h3>
-    <p> Spelare: <?= $playerScore  ?> </p>
-    <p> Datorn: <?=  $computerScore ?> </p>
+    <p> Spelare: <?= $playerScore ?? null ?> </p>
+    <p> Datorn: <?=  $computerScore ?? null ?> </p>
      
     <?php if (isset($gameover)) { ?>
         <form action="../dice/reset" method="post">

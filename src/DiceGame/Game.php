@@ -8,8 +8,8 @@ class Game
 {
     private int $computerScore;
     private int $playerScore;
-    private object $playersDice;
-    private object $computersDice;
+    public object $playersDice;
+    public object $computersDice;
     public array $data;
 
     public function __construct()
@@ -50,6 +50,7 @@ class Game
             $this->resetGame();
             $data["message"] = "Välj antal tärningar om du vill starta ny omgång";
         }
+        // var_dump($data);
         $result = $this->mergeData($data);
         return $result;
     }
@@ -58,6 +59,7 @@ class Game
     {
         $pSum = $this->playersDice->sum;
         $winner = null;
+
         while ($this->computersDice->sum < $pSum) {
             $this->computersDice->roll();
         }
@@ -83,14 +85,14 @@ class Game
     }
 
 
-    private function setScore($winner): void
+    public function setScore($winner): int
     {
         if ($winner == "computer") {
             $this->computerScore += 1;
-            return;
+            return $this->computerScore;
         }
         $this->playerScore += 1;
-        return;
+        return $this->playerScore;
     }
 
     public function getPlayerScore(): int
@@ -104,7 +106,7 @@ class Game
     }
 
 
-    private function resetGame(): void
+    private function resetGame(): array
     {
         $this->data = [
             "computersum" => null,
@@ -113,6 +115,7 @@ class Game
         ];
         $_SESSION["continue"] = "play";
         $_SESSION["newGame"] = true;
+        return $this->data;
     }
 
     public function resetScore(): void
@@ -125,8 +128,8 @@ class Game
 
     public function createDices($amount): void
     {
-        $this->playersDice = new DiceHand($amount);
-        $this->computersDice = new DiceHand($amount);
+        $this->playersDice = new DiceHand($amount, new Dice());
+        $this->computersDice = new DiceHand($amount, new Dice());
     }
 
 
