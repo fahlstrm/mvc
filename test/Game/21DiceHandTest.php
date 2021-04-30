@@ -18,12 +18,18 @@ class TwentyoneDiceHandTest extends TestCase
         $this->diceHand = new DiceHand(5, new Dice);
     }
 
+    /**
+     * Test to roll hand
+     */
     public function testRollHandTwentyOne()
     {
         $res = $this->diceHand->roll();
         $this->assertIsInt($res);
     }
 
+    /**
+     * test that last roll returning string
+     */
     public function testLastRollTwentyOne()
     {
         $rolled = $this->diceHand->roll();

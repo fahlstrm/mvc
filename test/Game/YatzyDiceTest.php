@@ -18,12 +18,18 @@ class YatzyDiceTest extends TestCase
         $this->dice = new GameDice;
     }
 
+    /**
+     * Test to roll dices
+     */
     public function testRollGameDice()
     {
         $res = $this->dice->roll();
         $this->assertIsNumeric($res);
     }
 
+    /**
+     * Test that result equals whats rolled
+     */
     public function testGetLastRollGameDice()
     {
         $rolled = $this->dice->roll();

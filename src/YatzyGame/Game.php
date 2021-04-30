@@ -196,6 +196,14 @@ class Game
         return $this->scoreExtra["summa"];
     }
 
+    
+
+    public function setScoreExtraYatzy(): int
+    {
+        $this->scoreExtra["yatzy"] = 50;
+        return $this->scoreExtra["yatzy"];
+    }
+
 
     public function resetThisRound(): int
     {

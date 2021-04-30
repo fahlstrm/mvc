@@ -65,6 +65,7 @@ class TwentyOne
     {
         $psr17Factory = new Psr17Factory();
         $result = null;
+        // var_dump($_POST)
         if (isset($_POST["ongoing"])) {
             $result = $_SESSION["object"]->playGamePlayer($_SESSION["object"]->data);
         } else if (isset($_POST["stop"])) {

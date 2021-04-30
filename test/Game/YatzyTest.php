@@ -14,22 +14,11 @@ class YatzyTest extends TestCase
 {
     private object $game; 
 
+    /**
+     * The setUp for each test 
+     */
     protected function setUp(): void
     {
-        // $mockDice = $this->createMock("\Frah\YatzyGame\GameDice");
-        // $mockDice = $this->getMockBuilder("\Frah\YatzyGame\GameDice")->getMock();
-        // $mockDice->roll = 6;
-        // $mockDice->method("getLastRoll")->willReturn(6);
-        // $mockDice->method("roll")->willReturn(6);
-
-        // $mockHand = $this->getMockBuilder("\Frah\YatzyGame\DiceHand")
-        //         ->setConstructorArgs(array(5, $mockDice))
-        //         ->getMock();
-        // $mockHand->dices = [$mockDice, $mockDice, $mockDice, $mockDice, $mockDice];
-
-        // $mockHand->method("getLastRoll")->willReturn([6, 6, 1, 6, 5]);
-        // $this->game = new Game($mockHand);
-        // $this->game->diceHand->getLastRoll();
         $this->game = new Game(new DiceHand(5, new GameDice));
     }
 
@@ -42,6 +31,9 @@ class YatzyTest extends TestCase
         $this->assertIsArray($res);
     }
 
+    /**
+     * Test that thisRound is updated by 1
+     */
     public function testSetThisRound()
     {
         $res = $this->game->setThisRound();
@@ -49,6 +41,9 @@ class YatzyTest extends TestCase
         $this->assertEquals($exp, $res);
     }
 
+    /**
+     * Test that getThisround returns correct value
+     */
     public function testGetThisRound()
     {
         $res = $this->game->getThisRound();
@@ -84,13 +79,60 @@ class YatzyTest extends TestCase
         $this->assertEquals($exp, [$res["rolled"][0], $res["rolled"][4]]);
     }
 
+    /**
+     * Test to updated scoreboard using test double to check all if cases
+     */
+    public function testUpdateScoreBoard()
+    {
+        $mockDice = $this->createMock("\Frah\YatzyGame\GameDice");
+        $mockDice = $this->getMockBuilder("\Frah\YatzyGame\GameDice")->getMock();
+        $mockDice->roll = 6;
+        $mockDice->method("getLastRoll")->willReturn(6);
+        $mockDice->method("roll")->willReturn(6);
+        $mockHand = $this->getMockBuilder("\Frah\YatzyGame\DiceHand")
+                ->setConstructorArgs(array(5, $mockDice))
+                ->getMock();
+        $mockHand->method("getLastRoll")->willReturn([6, 6, 6, 6, 6]);
+    
+        $this->game->diceHand = $mockHand;
 
-    // public function testUpdateScoreBoard()
-    // {
-    //     $res = $this->game->rollAgain();
-    // }
+        $res = $this->game->updateScoreBoard(6);
+        $this->assertEquals(30, $res["scoreboard"][6]);
+    }
 
+    /**
+     * Test if-case in updateScoreBoard is working
+     */
+    public function testUpdateScoreBoardFinal()
+    {
+        $mockDice = $this->createMock("\Frah\YatzyGame\GameDice");
+        $mockDice = $this->getMockBuilder("\Frah\YatzyGame\GameDice")->getMock();
+        $mockDice->roll = 6;
+        $mockDice->method("getLastRoll")->willReturn(6);
+        $mockDice->method("roll")->willReturn(6);
+        $mockHand = $this->getMockBuilder("\Frah\YatzyGame\DiceHand")
+                ->setConstructorArgs(array(5, $mockDice))
+                ->getMock();
+        $mockHand->method("getLastRoll")->willReturn([6, 6, 6, 1, 6]);
+    
+        $this->game->diceHand = $mockHand;
 
+        $scoreBoard = [
+            1 => 3,
+            2 => 6,
+            3 => 6,
+            4 => 16,
+            5 => 15,
+            6 => null
+        ];
+        $this->game->setScoreBoard($scoreBoard);
+        $res = $this->game->updateScoreBoard(6);
+        $this->assertEquals(true, $res["gameover"]);
+    }
+
+    /**
+     * Test that finalScore returns bool values in two cases
+     */
     public function testFinalScore()
     {
         $scoreBoard = [
@@ -104,9 +146,25 @@ class YatzyTest extends TestCase
         $this->game->setScoreBoard($scoreBoard);
         $res = $this->game->finalScore();
         $this->assertTrue($res);
+
+
+        $scoreBoard = [
+            1 => 3,
+            2 => 6,
+            3 => 6,
+            4 => 16,
+            5 => 15,
+            6 => null
+        ];
+        $this->game->setScoreBoard($scoreBoard);
+        $res = $this->game->finalScore();
+        $this->assertFalse($res);
     }
 
 
+    /**
+     * check that checkYatzy returns false once false
+     */
     public function testCheckYatzy()
     {
         $this->game->diceHand->roll();
@@ -134,7 +192,9 @@ class YatzyTest extends TestCase
         $this->assertTrue($res);
     }
 
-
+    /**
+     * Test that resetRoll returns array
+     */
     public function testResetRoll()
     {
         $res = $this->game->resetRoll();
@@ -150,6 +210,9 @@ class YatzyTest extends TestCase
         $this->assertFalse($res);
     }
 
+    /**
+     * Test that getScoreBoard returns array
+     */
     public function testGetScoreBoard()
     {
         $res = $this->game->getScoreBoard();
@@ -166,18 +229,29 @@ class YatzyTest extends TestCase
         $this->assertEquals($exp, $res);
     }
 
-
-    // public function testSetScore()
-    // {
-
-    // }
-
+    /**
+     * Test that getScoreExtra returns array
+     */
     public function testGetScoreExtra()
     {
         $res = $this->game->getScoreExtra();
         $this->assertIsArray($res);
     }
 
+    /**
+     * Test that setscoreExtra sets yatzy correct
+     */
+    public function testSetScoreYatzy()
+    {
+        $this->game->setScoreExtraYatzy();
+        $this->game->setScore();
+        $res = $this->game->getScoreExtra();
+        $this->assertEquals(50, $res["summa"]);
+    }
+
+    /**
+     * Test that setScore sets correct values
+     */
     public function testSetScore()
     {
         $exp = $this->game->setScoreExtraSumma(63);
@@ -188,6 +262,9 @@ class YatzyTest extends TestCase
         $this->assertEquals($bonus, $res);
     }
 
+    /**
+     * Test that reset round sets thisRound to 1
+     */
     public function testResetThisRound()
     {
         $this->game->setThisRound();
@@ -199,18 +276,14 @@ class YatzyTest extends TestCase
         $this->assertEquals(1, $res);
     }
 
+    /**
+     * Test that resetGame returns array
+     */
     public function testResetGame() 
     {
         $res = $this->game->resetGame();
         $this->assertIsArray($res);
     }
-
-    // public function testMergeDefaultData()
-    // {
-    //     $res = $this->game->mergeDefaultData([1, 2, 3, "test"]);
-    //     $this->assertEquals($res[0], 1);
-    // }
-
 }
 
 

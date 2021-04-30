@@ -13,11 +13,17 @@ class TwentyOneGameTest extends TestCase
      */
     private object $game;
 
+    /**
+     * setUp function for the test
+     */
     protected function setUp(): void
     {
         $this->game = new Game();
     }
-    
+
+    /**
+     * Test that startGame returns array
+     */
     public function testStartGame()
     {
         $this->assertIsArray($this->game->startGame());
@@ -53,6 +59,9 @@ class TwentyOneGameTest extends TestCase
         $this->assertEquals("Du har förlorat, trist!", $res["winner"]);
     }
 
+    /**
+     * Using test double/mock to test the playGameComputer and the if cases within
+     */
     public function testPlayGameComputer()
     {
         $this->game->createDices(2);
@@ -107,7 +116,9 @@ class TwentyOneGameTest extends TestCase
     // }
 
 
-
+    /**
+     * Test that setScore function updateds value by 1 each time
+     */
     public function testSetScore()
     {
         $res = $this->game->setScore("computer");
@@ -117,6 +128,9 @@ class TwentyOneGameTest extends TestCase
         $this->assertEquals(1, $res);
     }
 
+    /**
+     * Test that getScore method returns correct value after setting it 3 times
+     */
     public function testGetPlayerScore()
     {
         $this->game->setScore("player");
@@ -127,6 +141,9 @@ class TwentyOneGameTest extends TestCase
         $this->assertIsInt($res);
     }
 
+    /**
+     * Test that getScore returns correct value after setting it 2 times
+     */
     public function testGetComputerScore()
     {
         $this->game->setScore("computer");
@@ -155,21 +172,9 @@ class TwentyOneGameTest extends TestCase
         $this->assertIsArray($res);
     }
     
-    // public function testResetScore()
-    // {
-    //     $class = new \ReflectionClass("\Frah\DiceGame\Game");
-    //     // $method = $class->getMethod("resetGame");
-    //     $method = $class->getMethod("resetScore");
-    //     $method->setAccessible(true); 
-    //     $computersDice = $class->getProperty("computersDice");
-
-
-    //     $res = $method->invokeArgs($this->game, []);
-
-    //     // // $this->assertEquals(0, $this->game->getComputerScore());
-    // }
-
-
+    /**
+     * Test that createdices creates two objects
+     */
     public function testCreateDices()
     {
         $class = new \ReflectionClass("\Frah\DiceGame\Game");
@@ -180,6 +185,9 @@ class TwentyOneGameTest extends TestCase
         $this->assertIsObject($playersDice);
     }
 
+    /**
+     * Test that merge data is array and that it merges with new array
+     */
     public function testMergeData()
     {
         $data = [];

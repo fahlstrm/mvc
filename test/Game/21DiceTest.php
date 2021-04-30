@@ -18,12 +18,18 @@ class TwentyOneDiceTest extends TestCase
         $this->dice = new Dice(6);
     }
 
+    /**
+     * Test to roll dice
+     */
     public function testRollGameDice()
     {
         $res = $this->dice->roll();
         $this->assertIsNumeric($res);
     }
 
+    /**
+     * Test to get last roll
+     */
     public function testGetLastRollGameDice()
     {
         $rolled = $this->dice->roll();

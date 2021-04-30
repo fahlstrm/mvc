@@ -18,12 +18,18 @@ class YatzyDiceHandTest extends TestCase
         $this->diceHand = new DiceHand(5, new GameDice);
     }
 
+    /**
+     * Test that roll is correctly made
+     */
     public function testRollDiceHand()
     {
         $res = $this->diceHand->roll();
         $this->assertIsArray($res);
     }
 
+    /**
+     * Test that last roll returns array
+     */
     public function testGetLastRollGameDice()
     {
         $rolled = $this->diceHand->roll();

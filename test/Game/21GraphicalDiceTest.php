@@ -18,12 +18,18 @@ class TwentyOneGraphDiceTest extends TestCase
         $this->dice = new GraphicalDice();
     }
 
+    /**
+     * Test to roll dice
+     */
     public function testRollGameDice()
     {
         $res = $this->dice->roll();
         $this->assertIsNumeric($res);
     }
 
+    /**
+     * Test to get last roll
+     */
     public function testGetLastRollGameDice()
     {
         $rolled = $this->dice->roll();
