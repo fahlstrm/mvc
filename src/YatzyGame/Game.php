@@ -150,7 +150,8 @@ class Game
 
     public function setScoreBoard($values): array
     {
-        for ($i = 1; $i < count($values)+1; $i++) {
+        $length = count($values) + 1;
+        for ($i = 1; $i < $length; $i++) {
             $this->scoreBoard[$i] = $values[$i];
         }
 

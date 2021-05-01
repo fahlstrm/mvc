@@ -32,7 +32,7 @@ class TwentyoneDiceHandTest extends TestCase
      */
     public function testLastRollTwentyOne()
     {
-        $rolled = $this->diceHand->roll();
+        $this->diceHand->roll();
         $res = $this->diceHand->lastRoll();
         $this->assertIsString($res);
     }

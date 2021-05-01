@@ -32,7 +32,7 @@ class YatzyDiceHandTest extends TestCase
      */
     public function testGetLastRollGameDice()
     {
-        $rolled = $this->diceHand->roll();
+        $this->diceHand->roll();
         $res = $this->diceHand->getLastRoll();
         $this->assertIsArray($res);
     }

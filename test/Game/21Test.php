@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Frah\DiceGame;
 
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
+// use \Frah\DiceGame\Game;
 
 class TwentyOneGameTest extends TestCase 
 {
@@ -159,7 +161,7 @@ class TwentyOneGameTest extends TestCase
      */
     public function testResetGame()
     {
-        $class = new \ReflectionClass("\Frah\DiceGame\Game");
+        $class = new ReflectionClass("\Frah\DiceGame\Game");
         $method = $class->getMethod("resetGame");
         $method->setAccessible(true); 
         $this->data = [
@@ -177,7 +179,7 @@ class TwentyOneGameTest extends TestCase
      */
     public function testCreateDices()
     {
-        $class = new \ReflectionClass("\Frah\DiceGame\Game");
+        $class = new ReflectionClass("\Frah\DiceGame\Game");
         $playersDice = $class->getProperty("playersDice");
         $computersDice = $class->getProperty("computersDice");
         $this->game->createDices(1);

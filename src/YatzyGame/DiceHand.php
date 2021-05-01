@@ -6,12 +6,10 @@ namespace Frah\YatzyGame;
 
 class DiceHand implements DiceInterface
 {
-    use DiceTrait;
-
     public array $dices;
     public ?int $sum = null;
 
-    public function __construct(int $amount, $dice)
+    public function __construct(int $amount, object $dice)
     {
         for ($i = 0; $i < $amount; $i++) {
             $this->dices[$i] = new $dice;

@@ -284,6 +284,7 @@ class YatzyTest extends TestCase
         $res = $this->game->resetGame();
         $this->assertIsArray($res);
     }
+
 }
 
 

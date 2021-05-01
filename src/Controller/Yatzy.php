@@ -6,10 +6,11 @@ namespace Mos\Controller;
 
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ResponseInterface;
-use Frah\YatzyGame\Game;
 
 use function Mos\Functions\renderView;
-use function Frah\YatzyGame;
+use Frah\YatzyGame\GameDice;
+use Frah\YatzyGame\DiceHand;
+use Frah\YatzyGame\Game;
 
 
 class Yatzy
@@ -17,7 +18,7 @@ class Yatzy
     public function start(): ResponseInterface
     {
         $psr17Factory = new Psr17Factory();
-        $callable = new Game(new \Frah\YatzyGame\DiceHand(5, new \Frah\YatzyGame\GameDice));
+        $callable = new Game(new DiceHand(5, new GameDice));
         $_SESSION["yatzyobject"] = $callable;
         $data = $callable->startGame();
 

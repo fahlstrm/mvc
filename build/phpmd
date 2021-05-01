@@ -1,0 +1,3 @@
+C:\Users\Frida\dbwebb-kurser\mvc\me\game\src\YatzyGame\DiceHand.php:15	Missing class import via use statement (line '15', column '36').
+C:\Users\Frida\dbwebb-kurser\mvc\me\game\src\YatzyGame\Game.php:7	The class Game has 11 public methods. Consider refactoring Game to keep number of public methods under 10.
+C:\Users\Frida\dbwebb-kurser\mvc\me\game\test\Game\YatzyTest.php:13	The class YatzyTest has 19 public methods. Consider refactoring YatzyTest to keep number of public methods under 10.

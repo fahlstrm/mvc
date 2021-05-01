@@ -1,0 +1,6 @@
+ERROR: Ruleset C:\Users\Frida\dbwebb-kurser\mvc\me\game\.phpcs.xml is not valid
+- On line 21, column 6: XML declaration allowed only at the start of the document
+
+
+Run "phpcs --help" for usage information
+

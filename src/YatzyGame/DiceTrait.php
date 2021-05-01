@@ -13,7 +13,7 @@ trait DiceTrait
     public int $faces;
     public int $roll;
 
-    public function __construct($faces = 6, $dice=null)
+    public function __construct($faces = 6)
     {
         $this->faces = $faces;
     }

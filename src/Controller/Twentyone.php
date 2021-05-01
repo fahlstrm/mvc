@@ -70,7 +70,7 @@ class TwentyOne
             $result = $_SESSION["object"]->playGamePlayer($_SESSION["object"]->data);
         } else if (isset($_POST["stop"])) {
             $result = $_SESSION["object"]->playGameComputer($_SESSION["object"]->data);
-        } else {
+        } else if (!isset($_POST["ongoing"]) && !isset($_POST["stop"])) {
             $result = [];
         }
 

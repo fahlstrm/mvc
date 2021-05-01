@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Frah\YatzyGame;
 
-class GameDice implements DiceInterface
+class GameDice
 {
     use DiceTrait;
 }
